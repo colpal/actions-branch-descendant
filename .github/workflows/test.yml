@@ -1,0 +1,12 @@
+---
+name: Test
+
+'on': push
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run colpal/actions-branch-descendant
+        uses: ./

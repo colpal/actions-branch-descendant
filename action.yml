@@ -1,10 +1,8 @@
-name: 'actions-template'
-author: ''
-description: 'description'
-inputs:
-  input_one:
-    description: ''
-    required: false
+---
+name: Branch Descendant
+description: Ensure closest MST parent branch is master.
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "composite"
+  steps:
+    - run: ./actions-branch-descendant.sh
+      shell: bash
