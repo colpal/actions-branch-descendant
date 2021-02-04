@@ -18,6 +18,6 @@ jobs:
 
       - name: Output Vars
         run: |
-          echo "Parent is valid? ${{ actions-branch-descendant.valid }}"
-          echo "Closest MST branch is: ${{ actions-branch-descendant.closest-MST-parent }}"
-          echo "${{ actions-branch-descendant.PR-string }}"
+          echo "Parent is valid? ${{ steps.actions-branch-descendant.valid }}"
+          echo "Closest MST branch is: ${{ steps.actions-branch-descendant.closest-MST-parent }}"
+          echo "${{ steps.actions-branch-descendant.PR-string }}"
