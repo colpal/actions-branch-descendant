@@ -24,7 +24,7 @@ jobs:
           STDOUTPUT: "${{ steps.actions-branch-descendant.outputs.stdout }}"
 
         run: |
-          echo "Parent is valid? ${process.env.VALID}"
-          echo "Closest MST branch is: ${process.env.PARENT}
-          echo ${process.env.PR-STRING}
-          echo ${process.env.STDOUTPUT}
+          echo Parent is valid? $VALID
+          echo Closest MST branch is: $PARENT
+          echo $PR-STRING
+          echo $STDOUTPUT
