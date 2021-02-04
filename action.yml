@@ -3,17 +3,14 @@ name: Branch Descendant
 description: Ensure closest MST parent branch is master.
 outputs:
   valid:
-    description: "If the PR is valid."
+    description: "If the branch's closest MST parent branch is Master."
     value: ${{ steps.actions-branch-descendant.outputs.valid }}
   PR-string:
-    description: "If the PR is valid."
+    description: "String indicating whether or not PR is good to go."
     value: ${{ steps.actions-branch-descendant.outputs.PR-string }}
   closest-MST-parent:
-    description: "If the PR is valid."
+    description: "The closest MST parent. Either Master, Develop, or Test."
     value: ${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}
-  stdoutput:
-    description: "If the PR is valid."
-    value: ${{ steps.actions-branch-descendant.outputs.stdout }}
 runs:
   using: "composite"
   steps:
