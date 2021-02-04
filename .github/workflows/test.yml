@@ -10,5 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - name: Run colpal/actions-branch-descendant
+        id: actions-branch-descendant
         uses: ./

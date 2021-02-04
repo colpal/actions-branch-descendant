@@ -22,14 +22,21 @@ echo ""
 if [ $current_sha == $master_sha ] 
 then
     echo "Master branch is closest MST parent. PR good to go 👍"
+    echo "::set-output name=valid::true"
+    echo "::set-output name=closest-MST-parent::Master"
+    echo "::set-output name=PR-string::Master branch is closest MST parent. PR good to go 👍"
     exit 0
 fi
 if [ $current_sha == $develop_sha ] 
 then
     echo "Develop branch is closest MST parent."
+    echo "::set-output name=closest-MST-parent::Develop"
 elif [ $current_sha == $test_sha ]
 then
     echo "Test branch is closest MST parent."
+    echo "::set-output name=closest-MST-parent::Test"
 fi
 echo "Master branch should be the closest MST parent. PR not good to go 👎"
+echo "::set-output name=valid::false"
+echo "::set-output name=PR-string::Master branch should be the closest MST parent. PR not good to go 👎"
 exit 1
