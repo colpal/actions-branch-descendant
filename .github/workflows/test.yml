@@ -17,7 +17,14 @@ jobs:
         uses: ./
 
       - name: Output Vars
+        env:
+          VALID: "${{ steps.actions-branch-descendant.outputs.valid }}"
+          PR-STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
+          PARENT: "${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
+          STDOUTPUT: "${{ steps.actions-branch-descendant.outputs.stdout }}"
+
         run: |
-          echo "Parent is valid? ${{ steps.actions-branch-descendant.outputs.valid }}"
-          echo "Closest MST branch is: ${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
-          echo "${{ steps.actions-branch-descendant.outputs.PR-string }}"
+          echo "Parent is valid? ${process.env.VALID}"
+          echo "Closest MST branch is: ${process.env.PARENT}
+          echo ${process.env.PR-STRING}
+          echo ${process.env.STDOUTPUT}
