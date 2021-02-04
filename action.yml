@@ -2,7 +2,6 @@
 name: Branch Descendant
 description: Ensure closest MST parent branch is master.
 runs:
-  using: "composite"
   steps:
     - run: ./actions-branch-descendant.sh
       shell: bash
