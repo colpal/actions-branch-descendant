@@ -13,4 +13,11 @@ jobs:
 
       - name: Run colpal/actions-branch-descendant
         id: actions-branch-descendant
+        continue-on-error: true
         uses: ./
+
+      - name: Output Vars
+        run: |
+          echo "Parent is valid? {{ actions-branch-descendant.valid }}"
+          echo "Closest MST branch is: {{ actions-branch-descendant.closest-MST-parent }}"
+          echo "{{ actions-branch-descendant.PR-string }}"
