@@ -21,7 +21,7 @@ jobs:
           VALID: "${{ steps.actions-branch-descendant.outputs.valid }}"
           PR-STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
           PARENT: "${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
-          STDOUTPUT: "${{ steps.actions-branch-descendant.outputs.stdout }}"
+          STDOUTPUT: "${{ steps.actions-branch-descendant.outputs.stdoutput }}"
 
         run: |
           echo Parent is valid? $VALID

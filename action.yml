@@ -11,7 +11,7 @@ outputs:
   closest-MST-parent:
     description: "If the PR is valid."
     value: ${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}
-  stdout:
+  stdoutput:
     description: "If the PR is valid."
     value: ${{ steps.actions-branch-descendant.outputs.stdout }}
 runs:
