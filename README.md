@@ -1,4 +1,4 @@
-This develop branch needs a commit to distinguish itself from the master branch.
+This branch needs a commit to distinguish itself from the master branch. This branch should pass when pull requested into any other branch, because the closest MST parent is `Master`.
 
 # Branch Descendant
 
