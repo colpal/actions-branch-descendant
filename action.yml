@@ -15,5 +15,5 @@ runs:
   using: "composite"
   steps:
     - id: actions-branch-descendant
-      run: ./actions-branch-descendant.sh
+      run:  ${{ github.action_path }}/actions-branch-descendant.sh
       shell: bash
