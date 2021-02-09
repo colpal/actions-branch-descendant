@@ -53,28 +53,28 @@ jobs:
       - name: Output Vars
         env:
           VALID: "${{ steps.actions-branch-descendant.outputs.valid }}"
-          PR-STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
+          PR_STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
           PARENT: "${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
         run: |
           echo Parent is valid? $VALID
           echo Closest MST branch is: $PARENT
-          echo $PR-STRING
+          echo $PR_STRING
           
       - name: Update Pull Request
         uses: actions/github-script@0.9.0
         env:
           VALID: "${{ steps.actions-branch-descendant.outputs.valid }}"
-          PR-STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
+          PR_STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
           PARENT: "${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = `#### \`${ process.env.PR-STRING }\`
+            const output = `#### \`${ process.env.PR_STRING }\`
             #### Closest MST parent branch needs to be: Master.
             #### Closest MST parent branch is: \`${ process.env.PARENT }\`.
             #### Closest MST parent is Master? \`${ process.env.VALID }\`.
             #### Read more about MST here: https://github.com/colpal/MST-branching.
-            #### \`${ process.env.PR-STRING }\``;
+            #### \`${ process.env.PR_STRING }\``;
               
             github.issues.createComment({
               issue_number: context.issue.number,

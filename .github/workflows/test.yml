@@ -19,9 +19,9 @@ jobs:
       - name: Output Vars
         env:
           VALID: "${{ steps.actions-branch-descendant.outputs.valid }}"
-          PR-STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
+          PR_STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
           PARENT: "${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
         run: |
           echo Parent is valid? $VALID
           echo Closest MST branch is: $PARENT
-          echo $PR-STRING
+          echo $PR_STRING
