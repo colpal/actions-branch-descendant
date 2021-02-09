@@ -1,3 +1,5 @@
+This develop branch needs a commit to distinguish itself from the master branch.
+
 # Branch Descendant
 
 This action checks that a branch's nearest MST ancestor is the Master branch. If the nearest MST ancestor is master, then the action will succeed, otherwise it will fail. In either case the action returns the outputs listed below. The commit hashes followed to reach the closest MST parent branch are available in the action's logs, but are not returned as a variable for other actions to use. To see sample output from this action, check the actions tab of this repo. Read more about MST here: https://github.com/colpal/MST-branching.
