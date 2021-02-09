@@ -27,7 +27,9 @@ A string indicating which MST branch is the closest ancestor to the branch being
 
 ## Example usage
 
-The following example runs the action on every pull request to the develop, test, or master branches. It then prints out the three outputs in the workflow logs, and leaves a comment containing the three outputs on the PR. Note that `continue-on-error` is set to `true` for this action. If this is not set, the action will fail when the nearest MST ancestor branch is not master, which will cause the action to fail. This may or may not be desirable depending on your use case.
+The following example runs the action on every pull request to the develop, test, or master branches. It then prints out the three outputs in the workflow logs, and leaves a comment containing the three outputs on the PR.  
+* Note that `continue-on-error` is set to `true` for this action. If this is not set, the action will fail when the nearest MST ancestor branch is not master, which will cause the action to fail. This may or may not be desirable depending on your use case.  
+* Also note that `ref` is set to `${{ github.head_ref }}` in `actions/checkout@v2`. This is so that the action is checking the 'compare' branch and not the 'base' branch of the PR. Without this the action is unlikely to perform as expected.
 
 ```
 name: Branch Descendant Validation
@@ -44,21 +46,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
       - name: Run colpal/actions-branch-descendant
         id: actions-branch-descendant
         continue-on-error: true
         uses: colpal/actions-branch-descendant@master
-
-      - name: Output Vars
-        env:
-          VALID: "${{ steps.actions-branch-descendant.outputs.valid }}"
-          PR_STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
-          PARENT: "${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
-        run: |
-          echo Parent is valid? $VALID
-          echo Closest MST branch is: $PARENT
-          echo $PR_STRING
+          
       - name: Update Pull Request
         uses: actions/github-script@0.9.0
         env:
