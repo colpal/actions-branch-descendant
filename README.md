@@ -48,7 +48,7 @@ jobs:
       - name: Run colpal/actions-branch-descendant
         id: actions-branch-descendant
         continue-on-error: true
-        uses: colpal/actions-branch-descendant
+        uses: colpal/actions-branch-descendant@master
 
       - name: Output Vars
         env:
