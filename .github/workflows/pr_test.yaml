@@ -12,21 +12,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
       - name: Run colpal/actions-branch-descendant
         id: actions-branch-descendant
         continue-on-error: true
         uses: colpal/actions-branch-descendant@master
-
-      - name: Output Vars
-        env:
-          VALID: "${{ steps.actions-branch-descendant.outputs.valid }}"
-          PR_STRING: "${{ steps.actions-branch-descendant.outputs.PR-string }}"
-          PARENT: "${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}"
-        run: |
-          echo Parent is valid? $VALID
-          echo Closest MST branch is: $PARENT
-          echo $PR_STRING
+          
       - name: Update Pull Request
         uses: actions/github-script@0.9.0
         env:
