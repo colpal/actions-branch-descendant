@@ -1,8 +1,7 @@
 head_sha=`git rev-parse HEAD`
-master_sha=`git rev-parse origin/master`
-develop_sha=`git rev-parse origin/develop`
-test_sha=`git rev-parse origin/test`
-
+master_sha=`git merge-base origin/master HEAD`
+develop_sha=`git merge-base origin/develop HEAD`
+test_sha=`git merge-base origin/test HEAD`
 
 echo "HEAD SHA: $head_sha"
 echo "Master SHA: $master_sha"
