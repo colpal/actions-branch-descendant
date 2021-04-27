@@ -2,7 +2,7 @@ head_sha=`git rev-parse HEAD`
 master_sha=`git rev-parse origin/master`
 develop_sha=`git rev-parse origin/develop`
 test_sha=`git rev-parse origin/test`
-current_sha=$head_sha
+
 
 echo "HEAD SHA: $head_sha"
 echo "Master SHA: $master_sha"
@@ -10,11 +10,18 @@ echo "Develop SHA: $develop_sha"
 echo "Test SHA: $test_sha"
 echo ""
 
+queue=($head_sha)
+current_sha=${queue[0]}
+
 echo "Ancestor SHA list going from HEAD -> master:"
 echo "$current_sha"
+
 while [ $current_sha != $master_sha ] && [ $current_sha != $test_sha ] && [ $current_sha != $develop_sha ]
 do
-    current_sha=`git cat-file -p $current_sha | awk 'NR > 1 {if(/^parent/){print $2; exit}}'`
+    queue+=(`git log --pretty=%P -n 1 "$current_sha"`)
+    unset queue[0]
+    current_sha=${queue[0]}
+    # current_sha=`git cat-file -p $current_sha | awk 'NR > 1 {if(/^parent/){print $2 $4; exit}}'`
     echo "$current_sha"
 done
 
