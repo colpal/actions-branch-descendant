@@ -18,10 +18,10 @@ echo "$current_sha"
 
 while [ $current_sha != $master_sha ] && [ $current_sha != $test_sha ] && [ $current_sha != $develop_sha ]
 do
+    
     queue+=(`git log --pretty=%P -n 1 "$current_sha"`)
-    unset queue[0]
+    queue=("${queue[@]:1}")
     current_sha=${queue[0]}
-    # current_sha=`git cat-file -p $current_sha | awk 'NR > 1 {if(/^parent/){print $2 $4; exit}}'`
     echo "$current_sha"
 done
 
