@@ -1,7 +1,7 @@
 head_sha=`git rev-parse HEAD`
-master_sha=`git merge-base --fork-point origin/master HEAD`
-develop_sha=`git merge-base --fork-point origin/develop HEAD`
-test_sha=`git merge-base --fork-point origin/test HEAD`
+master_sha=`diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "origin/master") <(git rev-list --first-parent "HEAD") | head -1`
+develop_sha=`diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "origin/develop") <(git rev-list --first-parent "HEAD") | head -1`
+test_sha=`diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "origin/test") <(git rev-list --first-parent "HEAD") | head -1`
 
 echo "HEAD SHA: $head_sha"
 echo "Master Fork SHA: $master_sha"
