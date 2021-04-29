@@ -1,13 +1,46 @@
 head_sha=`git rev-parse HEAD`
-master_sha=`git merge-base origin/master HEAD`
-develop_sha=`git merge-base origin/develop HEAD`
-test_sha=`git merge-base origin/test HEAD`
+master_sha=`git merge-base --fork-point origin/master HEAD`
+develop_sha=`git merge-base --fork-point origin/develop HEAD`
+test_sha=`git merge-base --fork-point origin/test HEAD`
 
 echo "HEAD SHA: $head_sha"
-echo "Master SHA: $master_sha"
-echo "Develop SHA: $develop_sha"
-echo "Test SHA: $test_sha"
+echo "Master Fork SHA: $master_sha"
+echo "Develop Fork SHA: $develop_sha"
+echo "Test Fork SHA: $test_sha"
 echo ""
+
+if [ ! -z "$master_sha" ] && [ -z "$develop_sha" ] && [ -z "$test_sha" ]
+then
+    echo "Master branch is closest MST parent. PR good to go 👍"
+    echo "::set-output name=valid::true"
+    echo "::set-output name=closest-MST-parent::Master"
+    echo "::set-output name=PR-string::Master branch is closest MST parent. PR good to go 👍"
+    exit 0
+fi
+
+if [ ! -z "$develop_sha" ] && [ -z "$master_sha" ] && [ -z "$test_sha" ]
+then
+    echo "Develop branch is closest MST parent."
+    echo "::set-output name=closest-MST-parent::Develop"
+    echo "Master branch should be the closest MST parent. PR not good to go 👎"
+    echo "::set-output name=valid::false"
+    echo "::set-output name=PR-string::Master branch should be the closest MST parent. PR not good to go 👎"
+    exit 1
+fi
+
+if [ ! -z "$test_sha" ] && [ -z "$master_sha" ] && [ -z "$develop_sha" ]
+then
+    echo "Test branch is closest MST parent."
+    echo "::set-output name=closest-MST-parent::Test"
+    echo "Master branch should be the closest MST parent. PR not good to go 👎"
+    echo "::set-output name=valid::false"
+    echo "::set-output name=PR-string::Master branch should be the closest MST parent. PR not good to go 👎"
+    exit 1
+fi
+
+: ${master_sha:="0"}
+: ${develop_sha:="0"}
+: ${test_sha:="0"}
 
 queue=($head_sha)
 current_sha=${queue[0]}
