@@ -1,15 +1,15 @@
 ---
 name: Branch Descendant
-description: Ensure closest MST parent branch is master.
+description: Ensure closest MST parent branch is main.
 outputs:
   valid:
-    description: "If the branch's closest MST parent branch is Master."
+    description: "If the branch's closest MST parent branch is Main."
     value: ${{ steps.actions-branch-descendant.outputs.valid }}
   PR-string:
     description: "String indicating whether or not PR is good to go."
     value: ${{ steps.actions-branch-descendant.outputs.PR-string }}
   closest-MST-parent:
-    description: "The closest MST parent. Either Master, Develop, or Test."
+    description: "The closest MST parent. Either Main, Develop, or Test."
     value: ${{ steps.actions-branch-descendant.outputs.closest-MST-parent }}
 runs:
   using: "composite"
