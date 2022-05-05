@@ -50,7 +50,6 @@ echo "$current_sha"
 
 while [ $current_sha != $master_sha ] && [ $current_sha != $test_sha ] && [ $current_sha != $develop_sha ]
 do
-    
     queue+=(`git log --pretty=%P -n 1 "$current_sha"`)
     queue=("${queue[@]:1}")
     current_sha=${queue[0]}
