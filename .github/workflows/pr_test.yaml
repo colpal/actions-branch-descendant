@@ -4,7 +4,7 @@ on:
     branches:
       - develop
       - test
-      - master
+      - main
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
       - name: Run colpal/actions-branch-descendant
         id: actions-branch-descendant
         continue-on-error: true
-        uses: colpal/actions-branch-descendant@master
+        uses: colpal/actions-branch-descendant@main
           
       - name: Update Pull Request
         uses: actions/github-script@0.9.0
@@ -29,9 +29,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const output = `### ${ process.env.PR_STRING }
-            #### Closest MST parent branch needs to be: \`Master\`.
+            #### Closest MST parent branch needs to be: \`Main\`.
             #### Closest MST parent branch is: \`${ process.env.PARENT }\`.
-            #### Closest MST parent is Master? \`${ process.env.VALID }\`.
+            #### Closest MST parent is Main? \`${ process.env.VALID }\`.
             #### Read more about MST here: https://github.com/colpal/MST-branching.
             ### ${ process.env.PR_STRING }`;
               
