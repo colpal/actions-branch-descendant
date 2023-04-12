@@ -12,29 +12,29 @@ echo ""
 if [ ! -z "$main_sha" ] && [ -z "$develop_sha" ] && [ -z "$test_sha" ]
 then
     echo "Main branch is closest MST parent. PR good to go 👍"
-    echo "::set-output name=valid::true"
-    echo "::set-output name=closest-MST-parent::Main"
-    echo "::set-output name=PR-string::Main branch is closest MST parent. PR good to go 👍"
+    echo "valid=true" >> $GITHUB_OUTPUT
+    echo "closest-MST-parent=Main" >> $GITHUB_OUTPUT
+    echo "PR-string=Main branch is closest MST parent. PR good to go 👍" >> $GITHUB_OUTPUT
     exit 0
 fi
 
 if [ ! -z "$develop_sha" ] && [ -z "$main_sha" ] && [ -z "$test_sha" ]
 then
     echo "Develop branch is closest MST parent."
-    echo "::set-output name=closest-MST-parent::Develop"
+    echo "closest-MST-parent=Develop" >> $GITHUB_OUTPUT
     echo "Main branch should be the closest MST parent. PR not good to go 👎"
-    echo "::set-output name=valid::false"
-    echo "::set-output name=PR-string::Main branch should be the closest MST parent. PR not good to go 👎"
+    echo "valid=false" >> $GITHUB_OUTPUT
+    echo "PR-string=Main branch should be the closest MST parent. PR not good to go 👎" >> $GITHUB_OUTPUT
     exit 1
 fi
 
 if [ ! -z "$test_sha" ] && [ -z "$main_sha" ] && [ -z "$develop_sha" ]
 then
     echo "Test branch is closest MST parent."
-    echo "::set-output name=closest-MST-parent::Test"
+    echo "closest-MST-parent=Test" >> $GITHUB_OUTPUT
     echo "Main branch should be the closest MST parent. PR not good to go 👎"
-    echo "::set-output name=valid::false"
-    echo "::set-output name=PR-string::Main branch should be the closest MST parent. PR not good to go 👎"
+    echo "valid=false" >> $GITHUB_OUTPUT
+    echo "PR-string=Main branch should be the closest MST parent. PR not good to go 👎" >> $GITHUB_OUTPUT
     exit 1
 fi
 
@@ -61,21 +61,21 @@ echo ""
 if [ $current_sha == $main_sha ] 
 then
     echo "Main branch is closest MST parent. PR good to go 👍"
-    echo "::set-output name=valid::true"
-    echo "::set-output name=closest-MST-parent::Main"
-    echo "::set-output name=PR-string::Main branch is closest MST parent. PR good to go 👍"
+    echo "valid=true" >> $GITHUB_OUTPUT
+    echo "closest-MST-parent=Main" >> $GITHUB_OUTPUT
+    echo "PR-string=Main branch is closest MST parent. PR good to go 👍" >> $GITHUB_OUTPUT
     exit 0
 fi
 if [ $current_sha == $develop_sha ] 
 then
     echo "Develop branch is closest MST parent."
-    echo "::set-output name=closest-MST-parent::Develop"
+    echo "closest-MST-parent=Develop" >> $GITHUB_OUTPUT
 elif [ $current_sha == $test_sha ]
 then
     echo "Test branch is closest MST parent."
-    echo "::set-output name=closest-MST-parent::Test"
+    echo "closest-MST-parent=Test" >> $GITHUB_OUTPUT
 fi
 echo "Main branch should be the closest MST parent. PR not good to go 👎"
-echo "::set-output name=valid::false"
-echo "::set-output name=PR-string::Main branch should be the closest MST parent. PR not good to go 👎"
+echo "valid=false" >> $GITHUB_OUTPUT
+echo "PR-string=Main branch should be the closest MST parent. PR not good to go 👎" >> $GITHUB_OUTPUT
 exit 1
