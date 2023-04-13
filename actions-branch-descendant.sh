@@ -4,12 +4,12 @@ DEVELOP_BRANCH_NAME='develop'
 TEST_BRANCH_NAME='test'
 PRODUCTION_BRANCH_NAME='master'
 
-NEAREST_PARENT=$(git log --format='%D' \
+NEAREST_PARENT="$(git log --format='%D' \
   | grep \
     -oEm1 \
-    "(origin/$DEVELOP_BRANCH_NAME|origin/$TEST_BRANCH_NAME|origin/$PRODUCTION_BRANCH_NAME)[,) ]")
+    "(origin/$DEVELOP_BRANCH_NAME|origin/$TEST_BRANCH_NAME|origin/$PRODUCTION_BRANCH_NAME)[,) ]")"
 
-NEAREST_PARENT=${NEAREST_PARENT%%,}
+NEAREST_PARENT="${NEAREST_PARENT%%,}"
 
 if [[ "$NEAREST_PARENT" == "origin/$PRODUCTION_BRANCH_NAME" ]] ; then
   echo "$NEAREST_PARENT branch is closest MST parent. PR good to go 👍"
