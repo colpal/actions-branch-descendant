@@ -3,7 +3,7 @@
 NEAREST_PARENT="$(git log --format='%D' \
   | grep \
     -oEm1 \
-    "(origin/$DEVELOP_BRANCH_NAME|origin/$TEST_BRANCH_NAME|origin/$PRODUCTION_BRANCH_NAME)[,) ]")"
+    "(origin/$DEVELOP_BRANCH_NAME|origin/$TEST_BRANCH_NAME|origin/$PRODUCTION_BRANCH_NAME)[, ]")"
 
 NEAREST_PARENT="${NEAREST_PARENT%%,}"
 
