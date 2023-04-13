@@ -1,6 +1,19 @@
 ---
 name: Branch Descendant
 description: Ensure closest MST parent branch is master.
+inputs:
+  develop_branch:
+    description: "Name of designated development branch"
+    required: true
+    default: "develop"
+  test_branch:
+    description: "Name of designated test branch"
+    required: true
+    default: "test"
+  production_branch:
+    description: "Name of designated production branch"
+    required: true
+    default: "master"
 outputs:
   valid:
     description: "If the branch's closest MST parent branch is Master."
@@ -15,5 +28,9 @@ runs:
   using: "composite"
   steps:
     - id: actions-branch-descendant
-      run:  ${{ github.action_path }}/actions-branch-descendant.sh
+      env:
+        DEVELOP_BRANCH_NAME: ${{ inputs.develop_branch }}
+        TEST_BRANCH_NAME: ${{ inputs.test_branch }}
+        PRODUCTION_BRANCH_NAME: ${{ inputs.production_branch }}
+      run: ${{ github.action_path }}/actions-branch-descendant.sh
       shell: bash
