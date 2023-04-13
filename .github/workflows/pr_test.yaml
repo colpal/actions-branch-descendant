@@ -17,7 +17,7 @@ jobs:
       - name: Run colpal/actions-branch-descendant
         id: actions-branch-descendant
         continue-on-error: true
-        uses: colpal/actions-branch-descendant@master
+        uses: colpal/actions-branch-descendant@feature/set_outputs_depr_master
           
       - name: Update Pull Request
         uses: actions/github-script@0.9.0
