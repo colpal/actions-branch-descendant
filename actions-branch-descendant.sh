@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-DEVELOP_BRANCH_NAME='develop'
-TEST_BRANCH_NAME='test'
-PRODUCTION_BRANCH_NAME='master'
-
 NEAREST_PARENT="$(git log --format='%D' \
   | grep \
     -oEm1 \
